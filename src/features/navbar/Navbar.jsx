@@ -14,7 +14,12 @@ import { fetchLoggedInUserAsync, selectUserInfo } from "../user/userSlice";
 const navigation = [
   { name: "Home", link: "/", user: true },
   { name: "Products", link: "/product", user: true },
-  { name: "About", link: "/about", user: true },
+  {
+    name: "About",
+    link: "https://divyesh-nandanwar.vercel.app/projects/e-commerce-onlineStore",
+    user: true,
+    target: "_blank",
+  },
 ];
 const userNavigation = [
   { name: "My Profile", link: "/profile" },
@@ -36,7 +41,7 @@ const Navbar = ({ children }) => {
       dispatch(fetchLoggedInUserAsync());
     }
   }, [userNavigation]);
-  
+
   const location = useLocation();
   return (
     <div>
@@ -60,6 +65,7 @@ const Navbar = ({ children }) => {
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
                           <Link
+                            target={item?.target}
                             key={item.name}
                             to={item.link}
                             className={classNames(
@@ -356,9 +362,7 @@ const Navbar = ({ children }) => {
         </Disclosure>
 
         <main>
-          <div className="mx-auto  max-w-7xl sm:px-6 lg:px-8 ">
-            {children}
-          </div>
+          <div className="mx-auto  max-w-7xl sm:px-6 lg:px-8 ">{children}</div>
         </main>
       </div>
     </div>

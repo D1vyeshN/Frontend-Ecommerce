@@ -59,8 +59,10 @@ export default function ProductList() {
   const [page, setPage] = useState(1);
   const [viewList, setViewList] = useState(false);
   const totalItems = useSelector(selectTotalItems);
-  const categories = useSelector(selectAllCategories);
-  const brands = useSelector(selectAllBrands);
+  const categories1 = useSelector(selectAllCategories);
+  const [categories, setCategories] = useState(categories1);
+  const brands1 = useSelector(selectAllBrands);
+  const [brands, setBrands] = useState(brands1);
   const filters = [
     {
       id: "category",
@@ -76,6 +78,18 @@ export default function ProductList() {
 
   const handleFilter = (e, section, option) => {
     let newFilter = { ...filter };
+
+    const showChecked = section.options.map((obj) =>
+      obj.value === option.value ? { ...obj, checked: e.target.checked } : obj
+    );
+
+    if (section.id === "brand") {
+      setBrands(showChecked);
+    }
+    if (section.id === "category") {
+      setCategories(showChecked);
+    }
+
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -86,6 +100,7 @@ export default function ProductList() {
       const index = newFilter[section.id].findIndex((e) => e === option.value);
       newFilter[section.id].splice(index, 1);
     }
+
     setFilter(newFilter);
   };
 
@@ -600,7 +615,7 @@ function ProductGrid({ viewList, totalItems, searchInput }) {
                                 aria-hidden="true"
                                 className="absolute inset-0"
                               />
-                               {product.title.slice(0,45)}...
+                              {product.title.slice(0, 45)}...
                             </div>
                           </h3>
                           <div>

@@ -38,10 +38,10 @@ const Footer = () => {
                 <li>
                   <Link
                     className="text-gray-400 transition hover:text-gray-100/75"
-                    to="https://www.bing.com"
+                    to="https://divyesh-nandanwar.vercel.app" target="_blank"
                   >
                     {" "}
-                    Code 🧑🏻‍💻 by Divyesh{" "}
+                    Developed by Divyesh 🧑🏻‍💻{" "}
                   </Link>
                 </li>
               </ul>
